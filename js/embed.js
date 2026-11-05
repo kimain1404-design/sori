@@ -21,7 +21,7 @@
     ? script.src.replace(/js\/embed\.js.*$/, '')
     : FALLBACK_BASE;
 
-  var CTA_HREF = '#';                      // 버튼 링크 주소
+  var CTA_HREF = 'https://sori.liveklass.com/cu/QDeq9MNT';                      // 버튼 링크 주소
 
   /* ---------- 폰트: Shadow DOM 안의 @font-face는 동작하지 않아 문서에 등록 ---------- */
   function injectFonts() {
