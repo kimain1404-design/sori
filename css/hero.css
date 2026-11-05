@@ -1,0 +1,352 @@
+/* =========================================================
+   VOICE PT — Section 01 Hero
+   - PC(768px~)  : 3200 x 1092 시안 비율
+   - Mobile(~767px): 2160 x 2160 시안 비율
+   모든 치수는 시안 픽셀값 × --u 로 계산되어, 화면 폭에 맞춰
+   시안과 같은 비율로 자연스럽게 커지고 작아집니다.
+   ========================================================= */
+
+/* @fontface-start */
+/* Paperlogy (페이퍼로지) — 프로젝트에 이미 폰트가 등록돼 있다면 이 블록은 지워도 됩니다 */
+@font-face {
+  font-family: "Paperlogy";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Paperlogy-3Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Paperlogy";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Paperlogy-4Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Paperlogy";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Paperlogy-5Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Paperlogy";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Paperlogy-6SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Paperlogy";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Paperlogy-7Bold.woff2") format("woff2");
+}
+/* @fontface-end */
+
+.vp-hero,
+.vp-hero * { box-sizing: border-box; }
+
+.vp-hero {
+  --vp-blue: #0066ff;
+  --vp-blue-hover: #1a75ff;
+  --vp-white: #ffffff;
+  --vp-desc: #d4deee;
+  --vp-ease: cubic-bezier(.65, 0, .35, 1);
+  --vp-ease-out: cubic-bezier(.22, 1, .36, 1);
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #0a1a33;
+  color: var(--vp-white);
+  font-family: "Paperlogy", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+               "Noto Sans KR", "Malgun Gothic", sans-serif;
+  container-type: inline-size;   /* 내부 cqw 단위의 기준 */
+  word-break: keep-all;
+  /* 붙여 넣는 사이트의 글자 스타일이 상속되지 않도록 초기화 */
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-align: left;
+  text-indent: 0;
+  text-transform: none;
+  text-shadow: none;
+  white-space: normal;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- 배경 이미지 ---------- */
+.vp-hero__bg,
+.vp-hero__bg img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.vp-hero__bg img {
+  animation: vp-bg-in 1.4s var(--vp-ease-out) both;
+}
+
+/* ---------- 텍스트 영역 (PC 기준값) ---------- */
+.vp-hero__content {
+  --u: calc(100cqw / 3200);      /* 시안 1px */
+  --title-size: calc(122 * var(--u));
+  --title-lh: 1.41;
+  --title-ls: 0.015em;
+  --desc-size: calc(49 * var(--u));
+  --desc-lh: 1.388;
+
+  position: absolute;
+  left: calc(398 * var(--u));
+  top: calc(221 * var(--u));
+}
+
+.vp-hero__title {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  font-size: var(--title-size);
+  line-height: var(--title-lh);
+  letter-spacing: var(--title-ls);
+  font-weight: 400;
+}
+
+.vp-hero__line { display: block; white-space: nowrap; }
+.vp-hero__line--2 {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.vp-hero__desc {
+  margin: calc(44 * var(--u)) 0 0;
+  padding: 0;
+  font-size: var(--desc-size);
+  line-height: var(--desc-lh);
+  letter-spacing: -0.022em;
+  color: var(--vp-desc);
+  white-space: nowrap;
+}
+
+.vp-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(16 * var(--u));
+  height: calc(95 * var(--u));
+  margin-top: calc(71 * var(--u));
+  padding: 0 calc(38 * var(--u)) 0 calc(33 * var(--u));
+  border-radius: calc(14 * var(--u));
+  background: var(--vp-blue);
+  color: var(--vp-white);
+  font-size: calc(39 * var(--u));
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border: 0;
+  box-shadow: none;
+  line-height: 1;
+  transition: background-color .25s ease, transform .25s var(--vp-ease-out);
+}
+.vp-hero__cta svg {
+  width: 1.05em;
+  height: 1.05em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform .3s var(--vp-ease-out);
+}
+.vp-hero__cta:hover { background: var(--vp-blue-hover); }
+.vp-hero__cta:hover svg { transform: translate(.12em, -.12em); }
+.vp-hero__cta:active { transform: scale(.97); }
+.vp-hero__cta:focus-visible {
+  outline: 3px solid #9cc3ff;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   [ ] 단어 회전 인터랙션
+   ========================================================= */
+.vp-swap {
+  display: inline-flex;
+  align-items: center;
+}
+.vp-swap__bracket {
+  font-weight: 600;
+}
+.vp-swap__bracket:first-child { margin-right: .16em; }
+.vp-swap__bracket:last-child  { margin-left: .16em; margin-right: .02em; }
+
+.vp-swap__slot {
+  position: relative;
+  display: inline-block;
+  height: calc(1em * var(--title-lh));
+  width: 1.85em;                              /* [ ] 사이 고정 폭 */
+}
+.vp-swap__track {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* [ ] 안 글자·파형 자체에 은은한 빛 */
+  filter:
+    drop-shadow(0 0 .06em rgba(140, 190, 255, .55))
+    drop-shadow(0 0 .28em rgba(64, 140, 255, .38));
+  animation: vp-glow 2.4s ease-in-out infinite;
+}
+@keyframes vp-glow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 .05em rgba(140, 190, 255, .35))
+      drop-shadow(0 0 .22em rgba(64, 140, 255, .22));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 .07em rgba(140, 190, 255, .7))
+      drop-shadow(0 0 .34em rgba(64, 140, 255, .5));
+  }
+}
+
+.vp-swap__item {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(90%);
+  filter: blur(.04em);
+  transition:
+    transform .55s var(--vp-ease-out),
+    opacity .35s ease,
+    filter .35s ease;
+}
+.vp-swap__item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.vp-swap__item.is-leaving {
+  opacity: 0;
+  transform: translateY(-90%);
+  filter: blur(.04em);
+  transition-timing-function: var(--vp-ease), ease, ease;
+}
+
+/* 음성 파형: 단어와 단어 사이에서 '목소리'가 단어로 바뀌는 연결 동작 */
+.vp-swap__wave {
+  --bar: .1em;
+  --wave-h: .8em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .1em;
+  transform: none;
+  filter: none;
+}
+.vp-swap__wave.is-leaving { transform: none; }
+.vp-swap__wave i {
+  display: block;
+  width: var(--bar);
+  height: calc(var(--wave-h) * var(--h));
+  min-height: var(--bar);
+  border-radius: var(--bar);
+  background: currentColor;
+  scale: 1 0;
+  transition: scale .4s var(--vp-ease-out);
+  transition-delay: calc(var(--i) * 30ms);
+}
+.vp-swap__wave.is-active i {
+  scale: 1 1;
+  animation: vp-wave .55s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -110ms);
+}
+.vp-swap__wave i:nth-child(1) { --h: .16; --i: 0; }
+.vp-swap__wave i:nth-child(2) { --h: .55; --i: 1; }
+.vp-swap__wave i:nth-child(3) { --h: 1;   --i: 2; }
+.vp-swap__wave i:nth-child(4) { --h: .82; --i: 3; }
+.vp-swap__wave i:nth-child(5) { --h: .6;  --i: 4; }
+.vp-swap__wave i:nth-child(6) { --h: .5;  --i: 5; }
+.vp-swap__wave i:nth-child(7) { --h: .16; --i: 6; }
+
+@keyframes vp-wave {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(.45); }
+}
+
+/* =========================================================
+   첫 진입 모션 (페이지 로드 1회)
+   ========================================================= */
+.vp-hero__line,
+.vp-hero__desc,
+.vp-hero__cta {
+  animation: vp-rise .9s var(--vp-ease-out) both;
+}
+.vp-hero__line--1 { animation-delay: .15s; }
+.vp-hero__line--2 { animation-delay: .27s; }
+.vp-hero__desc    { animation-delay: .42s; }
+.vp-hero__cta     { animation-delay: .55s; }
+
+@keyframes vp-rise {
+  from { opacity: 0; transform: translateY(.6em); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes vp-bg-in {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* =========================================================
+   Mobile (~767px) : 2160 x 2160 시안
+   ========================================================= */
+@media (max-width: 767px) {
+  .vp-hero__content {
+    --u: calc(100cqw / 2160);
+    --title-size: calc(204 * var(--u));
+    --title-lh: 1.26;
+    --title-ls: 0;
+    --desc-size: max(13px, calc(79 * var(--u)));
+    --desc-lh: 1.325;
+    left: calc(138 * var(--u));
+    top: calc(164 * var(--u));
+  }
+  .vp-hero__desc { margin-top: calc(47 * var(--u)); }
+  .vp-hero__cta {
+    height: calc(145 * var(--u));
+    margin-top: calc(70 * var(--u));
+    padding: 0 calc(72 * var(--u)) 0 calc(56 * var(--u));
+    gap: calc(26 * var(--u));
+    border-radius: calc(22 * var(--u));
+    font-size: max(13px, calc(68 * var(--u)));
+  }
+  .vp-hero__desc { letter-spacing: -0.037em;
+  }
+  .vp-swap__wave { --wave-h: .7em; }
+}
+
+/* ---------- 접근성 ---------- */
+.vp-sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vp-hero *,
+  .vp-hero *::before,
+  .vp-hero *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+  }
+}
