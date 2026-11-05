@@ -178,6 +178,8 @@
   border-radius: calc(14 * var(--u)) !important;
   background: var(--vp-blue) !important;
   color: var(--vp-white) !important;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+               "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif !important;
   font-size: calc(39 * var(--u)) !important;
   font-weight: 500 !important;
   letter-spacing: -0.01em !important;
