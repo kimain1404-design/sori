@@ -291,7 +291,7 @@
 /* 단어: 3개가 --vp-hold 간격으로 차례로 등장 → 퇴장 */
 .vp-hero .vp-swap__word {
   opacity: 0;
-  transform: translateY(90%);
+  transform: translateY(100%);
   animation: vp-word calc(var(--vp-hold) * 3) infinite backwards;
   animation-delay: var(--vp-intro);
 }
@@ -299,17 +299,18 @@
 .vp-hero .vp-swap__word--3 { animation-delay: calc(var(--vp-intro) + var(--vp-hold) * 2); }
 
 @keyframes vp-word {
-  0% {
-    opacity: 0; transform: translateY(90%); filter: blur(.04em);
+  /* 이전 단어가 완전히 빠진 뒤(약 0.3초) 들어와서 두 단어가 겹치지 않음 */
+  0%, 4.5% {
+    opacity: 0; transform: translateY(100%);
     animation-timing-function: cubic-bezier(.22, 1, .36, 1);
   }
-  8.33% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  12%    { opacity: 1; transform: translateY(0); }
   33.33% {
-    opacity: 1; transform: translateY(0); filter: blur(0);
-    animation-timing-function: cubic-bezier(.65, 0, .35, 1);
+    opacity: 1; transform: translateY(0);
+    animation-timing-function: cubic-bezier(.55, 0, .75, .3);
   }
-  41.67% { opacity: 0; transform: translateY(-90%); filter: blur(.04em); }
-  100%   { opacity: 0; transform: translateY(-90%); filter: blur(.04em); }
+  37.5%  { opacity: 0; transform: translateY(-100%); }
+  100%   { opacity: 0; transform: translateY(-100%); }
 }
 
 /* 파형: 처음 한 번만 보였다가 사라짐 */
@@ -320,7 +321,7 @@
   align-items: center !important;
   justify-content: center !important;
   gap: .1em !important;
-  animation: vp-wave-out .5s cubic-bezier(.65, 0, .35, 1) var(--vp-intro) forwards;
+  animation: vp-wave-out .28s cubic-bezier(.55, 0, .75, .3) var(--vp-intro) forwards;
 }
 .vp-hero .vp-swap__bar {
   display: block !important;
@@ -350,7 +351,7 @@
   100% { transform: scaleY(.45); }
 }
 @keyframes vp-wave-out {
-  to { opacity: 0; transform: translateY(-90%); filter: blur(.04em); visibility: hidden; }
+  to { opacity: 0; transform: translateY(-100%); visibility: hidden; }
 }
 
 /* =========================================================
