@@ -21,9 +21,7 @@
     ? script.src.replace(/js\/embed\.js.*$/, '')
     : FALLBACK_BASE;
 
-  var WORDS = '인생,직업,대학';
   var CTA_HREF = '#';                      // 버튼 링크 주소
-  var TIMING = { intro: 1400, word: 2200, leave: 600 };
 
   /* ---------- 폰트: Shadow DOM 안의 @font-face는 동작하지 않아 문서에 등록 ---------- */
   function injectFonts() {
@@ -40,84 +38,9 @@
     (document.head || document.documentElement).appendChild(style);
   }
 
-  /* ---------- 마크업 ---------- */
+  /* ---------- 마크업 (index.html과 동일, 이미지 경로만 BASE 기준) ---------- */
   function markup() {
-    return '' +
-      '<section class="vp-hero" aria-labelledby="vp-hero-title">' +
-        '<picture class="vp-hero__bg">' +
-          '<source media="(max-width: 767px)" srcset="' + BASE + 'img/hero_mob.webp">' +
-          '<img src="' + BASE + 'img/hero_pc.webp" alt="음률 이주성 대표" width="3200" height="1092">' +
-        '</picture>' +
-        '<div class="vp-hero__content">' +
-          '<h1 class="vp-hero__title" id="vp-hero-title">' +
-            '<span class="vp-hero__line vp-hero__line--1">보이스로</span>' +
-            '<span class="vp-hero__line vp-hero__line--2">' +
-              '<span class="vp-swap" data-words="' + WORDS + '" aria-hidden="true">' +
-                '<span class="vp-swap__bracket">[</span>' +
-                '<span class="vp-swap__slot"><span class="vp-swap__track">' +
-                  '<span class="vp-swap__item vp-swap__wave is-active">' +
-                    '<i></i><i></i><i></i><i></i><i></i><i></i><i></i>' +
-                  '</span>' +
-                '</span></span>' +
-                '<span class="vp-swap__bracket">]</span>' +
-              '</span><span class="vp-hero__tail">이 달라진다</span>' +
-            '</span>' +
-            '<span class="vp-sr-only">보이스로 ' + WORDS.split(',').join(', ') + '이 달라진다</span>' +
-          '</h1>' +
-          '<p class="vp-hero__desc">회의부터 발표, 일상 속 대화까지<br>목소리 하나로 달라지는 말하기의 순간을 경험해보세요</p>' +
-          '<a class="vp-hero__cta" href="' + CTA_HREF + '" target="_top">보이스 PT 시작하기 ' +
-            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></a>' +
-        '</div>' +
-      '</section>';
-  }
-
-  /* ---------- [ ] 단어 회전 ---------- */
-  function initSwap(root) {
-    var track = root.querySelector('.vp-swap__track');
-    var wave = root.querySelector('.vp-swap__wave');
-    var words = (root.getAttribute('data-words') || '').split(',')
-      .map(function (w) { return w.trim(); }).filter(Boolean);
-    if (!track || !wave || !words.length) return;
-
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var wordEls = words.map(function (text) {
-      var el = document.createElement('span');
-      el.className = 'vp-swap__item vp-swap__word';
-      el.textContent = text;
-      track.appendChild(el);
-      return el;
-    });
-    var sequence = [wave].concat(wordEls);
-    var current = wave, step = 0, timer = null;
-
-    function show(next) {
-      if (next === current) return;
-      var prev = current;
-      prev.classList.remove('is-active');
-      prev.classList.add('is-leaving');
-      setTimeout(function () { prev.classList.remove('is-leaving'); }, TIMING.leave);
-      next.classList.remove('is-leaving');
-      void next.offsetWidth;
-      next.classList.add('is-active');
-      current = next;
-    }
-    function holdTime(el) {
-      if (reduceMotion.matches) return el === wave ? 0 : 2200;
-      return el === wave ? TIMING.intro : TIMING.word;
-    }
-    function tick() {
-      step = step + 1 >= sequence.length ? 1 : step + 1;
-      show(sequence[step]);
-      schedule();
-    }
-    function schedule() {
-      clearTimeout(timer);
-      timer = setTimeout(tick, holdTime(current));
-    }
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) clearTimeout(timer); else schedule();
-    });
-    schedule();
+    return "<div class=\"vp-hero\">\n  <img class=\"vp-hero__bg vp-hero__bg--pc\" src=\"" + BASE + "img/hero_pc.webp\" alt=\"음률 이주성 대표\" width=\"3200\" height=\"1092\">\n  <img class=\"vp-hero__bg vp-hero__bg--mob\" src=\"" + BASE + "img/hero_mob.webp\" alt=\"음률 이주성 대표\" width=\"2160\" height=\"2160\">\n  <div class=\"vp-hero__content\">\n    <div class=\"vp-hero__title\">\n      <div class=\"vp-hero__line vp-hero__line--1\">보이스로</div>\n      <div class=\"vp-hero__line vp-hero__line--2\">\n        <span class=\"vp-swap\">\n          <span class=\"vp-swap__bracket vp-swap__bracket--l\">[</span>\n          <span class=\"vp-swap__slot\"><span class=\"vp-swap__track\">\n            <span class=\"vp-swap__item vp-swap__wave\"><span class=\"vp-swap__bar\">|</span><span class=\"vp-swap__bar\">|</span><span class=\"vp-swap__bar\">|</span><span class=\"vp-swap__bar\">|</span><span class=\"vp-swap__bar\">|</span><span class=\"vp-swap__bar\">|</span><span class=\"vp-swap__bar\">|</span></span>\n            <span class=\"vp-swap__item vp-swap__word vp-swap__word--1\">인생</span>\n            <span class=\"vp-swap__item vp-swap__word vp-swap__word--2\">직업</span>\n            <span class=\"vp-swap__item vp-swap__word vp-swap__word--3\">대학</span>\n          </span></span>\n          <span class=\"vp-swap__bracket vp-swap__bracket--r\">]</span>\n        </span><span class=\"vp-hero__tail\">이 달라진다</span>\n      </div>\n    </div>\n    <div class=\"vp-hero__desc\">회의부터 발표, 일상 속 대화까지<br>목소리 하나로 달라지는 말하기의 순간을 경험해보세요</div>\n    <a class=\"vp-hero__cta\" href=\"#\">보이스 PT 시작하기 <span class=\"vp-hero__arrow\">↗</span></a>\n  </div>\n</div>".replace('href="#"', 'href="' + CTA_HREF + '" target="_top"');
   }
 
   /* ---------- 히어로 하나 그리기 ---------- */
@@ -151,8 +74,6 @@
       if (started) return;
       started = true;
       hero.classList.add('is-loaded');
-      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-      ready.then(function () { initSwap(hero.querySelector('.vp-swap')); });
     }
     link.addEventListener('load', start);
     link.addEventListener('error', start);
